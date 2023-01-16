@@ -1,5 +1,5 @@
 # Simple Chat Client and Server
-The chat server uses [libevent](https://libevent.org/) and the client uses poll.
+The chat client uses poll and the server uses [libevent](https://libevent.org/).
 
 This example is a combination of what I learned from [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/) and [A tiny introduction to asynchronous IO](https://libevent.org/libevent-book/01_intro.html). 
 
