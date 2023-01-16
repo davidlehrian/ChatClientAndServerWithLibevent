@@ -54,7 +54,7 @@ int get_listener_socket(void) {
     struct addrinfo hints, *ai, *p;
     // Get us a socket and bind it
     memset(&hints, 0, sizeof hints);
-    hints.ai_family = AF_UNSPEC; //AF_UNSPEC AF_INET or AF_INET6
+    hints.ai_family = AF_INET; //AF_UNSPEC AF_INET or AF_INET6
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE;
     if ((rv = getaddrinfo(NULL, PORT, &hints, &ai)) != 0) {
@@ -77,18 +77,15 @@ int get_listener_socket(void) {
             continue;
         }
 
-        char ip[INET6_ADDRSTRLEN];
         int port;
-        void *ipv;
-        if (p->ai_addr->sa_family == AF_INET) {
-            struct sockaddr_in *ipv4 = ipv = (struct sockaddr_in*)p->ai_addr;
+        if (p->ai_family == AF_INET) {
+            struct sockaddr_in *ipv4 = (struct sockaddr_in*)p->ai_addr;
             port = ipv4->sin_port;
         }else{
-            struct sockaddr_in6 *ipv6 = ipv =(struct sockaddr_in6*)p->ai_addr;
-            port = ipv6->sin6_port;
+            struct sockaddr_in6 *ipv6 = (struct sockaddr_in6*)p->ai_addr;
+            port = ipv6->sin6_port;   
         }
-        inet_ntop(p->ai_addr->sa_family, ipv, ip, sizeof ip);
-        fprintf(stdout,"Starting Server %s on port %d.\n",ip,ntohs(port));
+        fprintf(stdout,"starting on port %d.\n",ntohs(port));
     
         break;
     }
@@ -215,7 +212,7 @@ void run(void) {
 }
 
 int main(int c, char **v) {
-    printf("libevent chat server\n");
+    printf("libevent chat server ");
     setvbuf(stdout, NULL, _IONBF, 0);
     run();
     return 0;

@@ -73,15 +73,18 @@ int get_socket(char *serverName){
     
     char ip[INET6_ADDRSTRLEN];
     int port;
-    void *ipv;
-    if (ai->ai_addr->sa_family == AF_INET) {
-        struct sockaddr_in *ipv4 = ipv = (struct sockaddr_in*)ai->ai_addr;
+    void *addr;
+    if (ai->ai_family == AF_INET) {
+        struct sockaddr_in *ipv4 = (struct sockaddr_in*)ai->ai_addr;
+        addr = &(ipv4->sin_addr);
         port = ipv4->sin_port;
     }else{
-        struct sockaddr_in6 *ipv6 = ipv =(struct sockaddr_in6*)ai->ai_addr;
+        struct sockaddr_in6 *ipv6 = (struct sockaddr_in6*)ai->ai_addr;
+        addr = &(ipv6->sin6_addr);
         port = ipv6->sin6_port;
+        
     }
-    inet_ntop(ai->ai_addr->sa_family, ipv, ip, sizeof ip);
+    inet_ntop(ai->ai_family, addr, ip, sizeof ip);
     fprintf(stdout,"Connected to Server %s on port %d.\n",ip,ntohs(port));
     
     freeaddrinfo(ai);
