@@ -1,7 +1,7 @@
 # Simple Chat Server And Client
 Example chat server using libevent and simple client using poll.
 
-This example is a combination of examples from what I learned from [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/) and [A tiny introduction to asynchronous IO](https://libevent.org/libevent-book/01_intro.html) that I put together to learn about C network programming for a project. 
+This example is a combination of what I learned from [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/) and [A tiny introduction to asynchronous IO](https://libevent.org/libevent-book/01_intro.html). 
 
 I did the original development on a Raspberry Pi 4 and then ported it to Windows using [Cygwin](https://www.cygwin.com/). I did the development using MS Visual Studio Code and I included the .vscode folders for both systems. The entries in these JSON files may need to be edited for your specific configuration which I will describe more fully below. 
 
